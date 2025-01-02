@@ -33,3 +33,15 @@
 ## 1.6.0
 
 - Field items for Datetime
+
+## 1.6.1
+
+- Fix intl dependency
+
+## 1.6.2
+
+- Fix unnecessary imports
+
+## 1.6.3
+
+- Upgrade dependencies

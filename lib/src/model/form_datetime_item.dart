@@ -1,7 +1,6 @@
 import 'package:fiona_dynamic_form/src/model/form_item.dart';
 import 'package:fiona_dynamic_form/src/widgets/form_datetime_item_widget.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 
 /// This class represents a Date time form item.
 class FormDatetimeItem extends FormItem {
@@ -44,9 +43,18 @@ class FormDatetimeItem extends FormItem {
     }
 
     if (withTime) {
-      return DateFormat("$dateFormat $timeFormat").format(value);
+      return formatDateTime(value, "$dateFormat $timeFormat");
     } else {
-      return DateFormat(dateFormat).format(value);
+      return formatDateTime(value, dateFormat);
     }
+  }
+  String formatDateTime(DateTime dateTime, String format) {
+    return format
+        .replaceAll('yyyy', dateTime.year.toString())
+        .replaceAll('MM', dateTime.month.toString().padLeft(2, '0'))
+        .replaceAll('dd', dateTime.day.toString().padLeft(2, '0'))
+        .replaceAll('HH', dateTime.hour.toString().padLeft(2, '0'))
+        .replaceAll('mm', dateTime.minute.toString().padLeft(2, '0'))
+        .replaceAll('ss', dateTime.second.toString().padLeft(2, '0'));
   }
 }

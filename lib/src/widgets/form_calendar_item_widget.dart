@@ -7,7 +7,7 @@ class FormCalendarItemWidget extends FormItemWidget {
   /// Form item
   final FormCalendarItem formItem;
 
-  FormCalendarItemWidget({super.key, required this.formItem});
+  const FormCalendarItemWidget({super.key, required this.formItem});
 
   @override
   State<FormCalendarItemWidget> createState() => _FormCalendarState();

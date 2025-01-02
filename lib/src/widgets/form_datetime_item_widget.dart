@@ -1,5 +1,4 @@
 import 'package:fiona_dynamic_form/fiona_dynamic_form.dart';
-import 'package:fiona_dynamic_form/src/widgets/form_item_widget.dart';
 import 'package:flutter/material.dart';
 
 /// This class represents a text form item widget.
