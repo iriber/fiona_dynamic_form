@@ -1,11 +1,10 @@
 import 'package:fiona_dynamic_form/src/model/form_select_item.dart';
 import 'package:example/example/model/country.dart';
 
-class CountryController extends FormSelectFieldController{
-
+class CountryController extends FormSelectFieldController {
   late List<Country> countries;
 
-  CountryController(){
+  CountryController() {
     countries = List<Country>.empty(growable: true);
     countries.add(Country(0, "- Select a Country -"));
     countries.add(Country(1, "Argentina"));
@@ -13,9 +12,10 @@ class CountryController extends FormSelectFieldController{
   }
 
   @override
-  Future<List> findItems(String text) async{
-
-    return countries.where((element) => element.name.startsWith(text)).toList(growable: true);
+  Future<List> findItems(String text) async {
+    return countries
+        .where((element) => element.name.startsWith(text))
+        .toList(growable: true);
   }
 
   @override
@@ -27,6 +27,4 @@ class CountryController extends FormSelectFieldController{
   int getItemId(item) {
     return (item as Country).id;
   }
-
-
 }

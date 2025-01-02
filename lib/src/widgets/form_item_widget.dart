@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
+/// Represents the label position
+enum FieldLabelPosition { inside, left, top, borderTop }
 
-abstract class FormItemWidget extends StatefulWidget{
-
+/// This class represents an form item widget.
+abstract class FormItemWidget extends StatefulWidget {
   const FormItemWidget({super.key});
-
 }

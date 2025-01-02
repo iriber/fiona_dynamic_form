@@ -1,5 +1,4 @@
-
-class Province{
+class Province {
   final String name;
   final int id;
   final int countryId;
@@ -9,4 +8,10 @@ class Province{
     return name;
   }
 
+  @override
+  bool operator ==(Object other) {
+    // Check if other is a Paddock and if names are equal
+    if (identical(this, other)) return true;
+    return other is Province && id == other.id;
+  }
 }

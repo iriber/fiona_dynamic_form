@@ -2,45 +2,54 @@ import 'package:fiona_dynamic_form/src/model/form_text_item.dart';
 import 'package:fiona_dynamic_form/src/widgets/form_item_widget.dart';
 import 'package:flutter/material.dart';
 
-enum FieldLabelPosition { inside, left, top}
-
+/// This class represents a text form item widget.
 class FormTextItemWidget extends FormItemWidget {
+  /// Form item
+  final FormTextItem formTextItem;
 
-  FormTextItem formTextItem;
-  TextEditingController controller = TextEditingController();
+  /// Controller.
+  final TextEditingController controller = TextEditingController();
 
-  FormTextItemWidget({super.key,
-    required this.formTextItem});
+  FormTextItemWidget({super.key, required this.formTextItem});
 
   @override
   State<FormTextItemWidget> createState() => _FormTextFieldState();
 }
 
+/// This class represents the state of the widget.
 class _FormTextFieldState extends State<FormTextItemWidget> {
-
   String? error;
-
+  late FormTextItem formItem;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
-
-    widget.controller.text = widget.formTextItem.initialValue??"";
+    formItem = widget.formTextItem;
+    widget.controller.text = formItem.initialValue ?? formItem.value ?? "";
 
     widget.controller.addListener(() {
-
-      widget.formTextItem.setValue(widget.controller.text);
-
+      formItem.value = (widget.controller.text);
+      setState(() {
+        error = "";
+      });
     });
 
-
-
+    formItem.addOnChangeListener((value) {
+      widget.controller.text = value ?? "";
+      setState(() {
+        error = "";
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    /*
+    widget.controller.addListener(() {
+      formItem.setValue(widget.controller.text);
+    });*/
 
-    widget.formTextItem.onError = ((messages){
+    formItem.onError = ((messages) {
       setState(() {
         String msg = "";
         for (var element in messages) {
@@ -50,21 +59,22 @@ class _FormTextFieldState extends State<FormTextItemWidget> {
         error = msg;
       });
     });
-    widget.formTextItem.addOnChangeListener ((value){
-      setState(() {
-        error = "";
-      });
+
+/*
+    formItem.onInitializeValue = ((dynamic value) {
+      widget.controller.text = (value!=null )? value: "";
     });
-
+*/
     Widget body;
-    switch(widget.formTextItem.formItemStyle?.labelPosition){
-
+    switch (formItem.formItemStyle?.labelPosition) {
       case FieldLabelPosition.inside:
         body = buildInput(context);
       case FieldLabelPosition.left:
         body = buildLabelLeft(context);
       case FieldLabelPosition.top:
         body = buildLabelTop(context);
+      case FieldLabelPosition.borderTop:
+        body = buildLabelBorderTop(context);
       case null:
         body = buildInput(context);
     }
@@ -72,86 +82,106 @@ class _FormTextFieldState extends State<FormTextItemWidget> {
   }
 
   Widget buildLabelTop(BuildContext context) {
-    bool hasError = (error??"").isNotEmpty;
-    TextStyle? style = widget.formTextItem.formItemStyle?.labelStyle;
-    if(hasError){
-      style = widget.formTextItem.formItemStyle?.errorLabelStyle;
+    bool hasError = (error ?? "").isNotEmpty;
+    TextStyle? style = formItem.formItemStyle?.labelStyle;
+    if (hasError) {
+      style = formItem.formItemStyle?.errorLabelStyle;
     }
     return Column(
-
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.formTextItem.label, style: style, textAlign: widget.formTextItem.formItemStyle?.labelAlign,),
-        const SizedBox(height: 8,),
+        Text(
+          formItem.label,
+          style: style,
+          textAlign: formItem.formItemStyle?.labelAlign,
+        ),
+        const SizedBox(
+          height: 8,
+        ),
         buildInput(context)
       ],
     );
   }
-  Widget buildLabelLeft(BuildContext context) {
 
-    bool hasError = (error??"").isNotEmpty;
-    TextStyle? style = widget.formTextItem.formItemStyle?.labelStyle;
-    if(hasError){
-      style = widget.formTextItem.formItemStyle?.errorLabelStyle;
+  Widget buildLabelBorderTop(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [buildInput(context, hideLabel: false)],
+    );
+  }
+
+  Widget buildLabelLeft(BuildContext context) {
+    bool hasError = (error ?? "").isNotEmpty;
+    TextStyle? style = formItem.formItemStyle?.labelStyle;
+    if (hasError) {
+      style = formItem.formItemStyle?.errorLabelStyle;
     }
 
-    int labelSize = widget.formTextItem.formItemStyle?.labelSize??1;
+    int labelSize = formItem.formItemStyle?.labelSize ?? 1;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
           flex: labelSize,
-          child:
-          Padding(padding: const EdgeInsets.only(right:8), child:
-          Text(widget.formTextItem.label, style: style,textAlign: widget.formTextItem.formItemStyle?.labelAlign,)),
-
+          child: Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: Text(
+                formItem.label,
+                style: style,
+                textAlign: formItem.formItemStyle?.labelAlign,
+              )),
         ),
-        Expanded( flex:(10-labelSize),child: buildInput(context, hideLabel:true))
+        Expanded(
+            flex: (10 - labelSize), child: buildInput(context, hideLabel: true))
       ],
     );
   }
 
-  Widget buildInput(BuildContext context, {bool hideLabel=false}) {
-
-    bool hasError = (error??"").isNotEmpty;
+  Widget buildInput(BuildContext context, {bool hideLabel = false}) {
+    bool hasError = (error ?? "").isNotEmpty;
 
     return TextFormField(
-      textAlign: widget.formTextItem.formItemStyle?.inputTextAlign??TextAlign.start,
-      style: widget.formTextItem.formItemStyle?.inputStyle,
-      obscureText: widget.formTextItem.formItemStyle?.hideText??false,
-      keyboardType: widget.formTextItem.inputType,
-      inputFormatters: widget.formTextItem.inputFormatters,
-      enabled: widget.formTextItem.formItemStyle?.enabled,
+      textAlign: formItem.formItemStyle?.inputTextAlign ?? TextAlign.start,
+      style: formItem.formItemStyle?.inputStyle,
+      obscureText: formItem.formItemStyle?.hideText ?? false,
+      keyboardType: formItem.inputType,
+      inputFormatters: formItem.inputFormatters,
+      enabled: formItem.formItemStyle?.enabled,
       controller: widget.controller,
-      initialValue: widget.formTextItem.initialValue,
+      initialValue: formItem.initialValue,
       decoration: InputDecoration(
-          prefixIcon: widget.formTextItem.formItemStyle?.prefixIcon,
+          prefixIcon: formItem.formItemStyle?.prefixIcon,
           filled: true,
-          fillColor: widget.formTextItem.formItemStyle?.fillColor??Colors.white30,
+          fillColor: formItem.formItemStyle?.fillColor ?? Colors.white30,
           contentPadding: const EdgeInsets.all(10),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: widget.formTextItem.formItemStyle?.focusedBorderColor??Colors.black87, width: 2),
+            borderSide: BorderSide(
+                color: formItem.formItemStyle?.focusedBorderColor ??
+                    Colors.black87,
+                width: 2),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: widget.formTextItem.formItemStyle?.borderColor??Colors.black54,
+                color: formItem.formItemStyle?.borderColor ?? Colors.black54,
                 width: 1.0),
           ),
-          labelStyle: widget.formTextItem.formItemStyle?.labelStyle,
+          labelStyle: formItem.formItemStyle?.labelStyle,
           floatingLabelBehavior: FloatingLabelBehavior.never,
           border: const OutlineInputBorder(),
-          prefix: const VerticalDivider(width: 10,),
-          labelText:  (hideLabel)?null: "  ${widget.formTextItem.label}",
-          errorBorder: hasError?OutlineInputBorder(
-            borderSide: BorderSide(
-                color: widget.formTextItem.formItemStyle?.errorBorderColor??Colors.red,
-                width: 1.0),
-          ):null,
-          errorText: hasError?error:null,
-          errorStyle: widget.formTextItem.formItemStyle?.errorInputStyle
-
-      ),
+          prefix: const VerticalDivider(
+            width: 10,
+          ),
+          labelText: (hideLabel) ? null : "  ${formItem.label}",
+          errorBorder: hasError
+              ? OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: formItem.formItemStyle?.errorBorderColor ??
+                          Colors.red,
+                      width: 1.0),
+                )
+              : null,
+          errorText: hasError ? error : null,
+          errorStyle: formItem.formItemStyle?.errorInputStyle),
     );
   }
-
 }

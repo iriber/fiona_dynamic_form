@@ -1,4 +1,4 @@
-class City{
+class City {
   final String name;
   final int id;
   final int stateId;
@@ -8,4 +8,10 @@ class City{
     return name;
   }
 
+  @override
+  bool operator ==(Object other) {
+    // Check if other is a Paddock and if names are equal
+    if (identical(this, other)) return true;
+    return other is City && id == other.id;
+  }
 }
