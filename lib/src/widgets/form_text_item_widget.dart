@@ -151,6 +151,10 @@ class _FormTextFieldState extends State<FormTextItemWidget> {
       initialValue: formItem.initialValue,
       decoration: InputDecoration(
           prefixIcon: formItem.formItemStyle?.prefixIcon,
+          prefixText: formItem.formItemStyle?.prefixText,
+          prefixStyle: formItem.formItemStyle?.inputStyle,
+          suffixText: formItem.formItemStyle?.suffixText,
+          suffixStyle: formItem.formItemStyle?.inputStyle,
           filled: true,
           fillColor: formItem.formItemStyle?.fillColor ?? Colors.white30,
           contentPadding: const EdgeInsets.all(10),
@@ -168,9 +172,7 @@ class _FormTextFieldState extends State<FormTextItemWidget> {
           labelStyle: formItem.formItemStyle?.labelStyle,
           floatingLabelBehavior: FloatingLabelBehavior.never,
           border: const OutlineInputBorder(),
-          prefix: const VerticalDivider(
-            width: 10,
-          ),
+          //prefix: const VerticalDivider(            width: 10,          ),
           labelText: (hideLabel) ? null : "  ${formItem.label}",
           errorBorder: hasError
               ? OutlineInputBorder(

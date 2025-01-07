@@ -10,7 +10,13 @@ class FormItemStyle {
   final FieldLabelPosition labelPosition;
 
   /// Icon prefix
-  final Widget? prefixIcon;
+  Widget? prefixIcon;
+
+  /// Text prefix
+  String? prefixText;
+
+  /// Text suffix
+  String? suffixText;
 
   /// Label size (between 1 and 10)
   final int labelSize;
@@ -37,7 +43,7 @@ class FormItemStyle {
   final bool enabled;
 
   /// Input TextAlign
-  final TextAlign? inputTextAlign;
+  TextAlign? inputTextAlign;
 
   /// Input style
   final TextStyle? inputStyle;
@@ -66,6 +72,8 @@ class FormItemStyle {
       this.errorLabelStyle,
       this.hideText = false,
       this.prefixIcon,
+      this.prefixText,
+      this.suffixText,
       this.error,
       this.enabled = true});
 }

@@ -32,8 +32,13 @@ class EmployeeSubmitted extends StatelessWidget {
               children: [
                 Text("Name: ${employee.name} "),
                 Text("Password: ${employee.password} "),
+                Text("Email: ${employee.email} "),
+                Text("Since year: ${employee.employeeSinceYear} "),
+                Text("Salary: ${employee.salary} "),
+                Text("Number: ${employee.number} "),
                 Text("Birthday: ${employee.birthday} "),
                 Text("Last Post: ${employee.lastPost} "),
+                Text("Start Time: ${employee.startTime} "),
                 Text("RememberMe: ${employee.rememberMe} "),
                 Text("City: ${employee.city?.name} "),
                 Text("State: ${employee.province?.name} "),

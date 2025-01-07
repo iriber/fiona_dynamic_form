@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 /// This class represents a Text form item.
 class FormTextItem extends FormItem {
   /// Input type
-  final TextInputType? inputType;
+  TextInputType? inputType;
   // Input type formatters
-  final List<TextInputFormatter>? inputFormatters;
+  List<TextInputFormatter>? inputFormatters;
 
   FormTextItem(
       {this.inputType,
@@ -26,14 +26,5 @@ class FormTextItem extends FormItem {
   @override
   Widget draw(BuildContext context) {
     return FormTextItemWidget(formTextItem: this);
-  }
-
-  @override
-  String? getValue() {
-    if (value == null) {
-      return null;
-    } else {
-      return value as String;
-    }
   }
 }

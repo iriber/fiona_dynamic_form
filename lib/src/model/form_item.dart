@@ -11,7 +11,7 @@ abstract class FormItem {
   final String label;
 
   /// The item style
-  final FormItemStyle? formItemStyle;
+  FormItemStyle? formItemStyle;
 
   /// The item initial value
   final dynamic initialValue;

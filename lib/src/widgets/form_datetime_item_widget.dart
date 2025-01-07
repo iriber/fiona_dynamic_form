@@ -64,6 +64,26 @@ class _FormDatetimeItemWidgetState extends State<FormDatetimeItemWidget> {
     }
   }
 
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: formItem.value != null
+          ? TimeOfDay.fromDateTime(formItem.value!)
+          : TimeOfDay.now(),
+    );
+    if (pickedTime != null) {
+      setState(() {
+        formItem.value = DateTime(
+          1900,
+          1,
+          1,
+          pickedTime.hour,
+          pickedTime.minute,
+        );
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -172,8 +192,13 @@ class _FormDatetimeItemWidgetState extends State<FormDatetimeItemWidget> {
   Widget buildInput(BuildContext context, {bool hideLabel = false}) {
     bool hasError = (error ?? "").isNotEmpty;
     return GestureDetector(
-      onTap: () =>
-          (formItem.withTime) ? _selectDateTime(context) : _selectDate(context),
+      onTap: () {
+        if (formItem.onlyTime) {
+          _selectTime(context);
+        } else {
+          (formItem.withTime) ? _selectDateTime(context) : _selectDate(context);
+        }
+      },
       child: AbsorbPointer(
         child: TextFormField(
           readOnly: true,

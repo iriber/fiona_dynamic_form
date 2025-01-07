@@ -45,3 +45,11 @@
 ## 1.6.3
 
 - Upgrade dependencies
+
+## 1.6.4
+
+- Format dart code
+
+## 1.6.5
+
+- Field items for Decimal & Currency. Validators for email & number range.

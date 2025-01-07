@@ -19,6 +19,12 @@ class FormEmployee extends FionaDynamicForm {
         formItemStyle: getInputStyle(),
         validators: [FormMaxLengthValidator(15), FormRequiredValidator()]);
 
+    FormTextItem email = FormTextItem(
+        label: "Email",
+        value: employee?.email,
+        formItemStyle: getInputStyle(),
+        validators: [FormEmailValidator(), FormRequiredValidator()]);
+
     FormTextItem password = FormTextItem(
         label: "Password",
         formItemStyle: getPasswordInputStyle(),
@@ -30,10 +36,37 @@ class FormEmployee extends FionaDynamicForm {
         value: employee?.birthday,
         formItemStyle: getInputStyle());
 
+    FormCurrencyItem salary = FormCurrencyItem(
+        label: "Salary",
+        moneySymbol: "USD",
+        isPrefix: true,
+        value: employee?.salary,
+        formItemStyle: getInputStyle());
+
+    FormDecimalItem number = FormDecimalItem(
+        label: "Number",
+        digits: 3,
+        value: employee?.number,
+        formItemStyle: getInputStyle());
+
     FormDatetimeItem lastPost = FormDatetimeItem(
         label: "Last Post",
         withTime: true,
         value: employee?.lastPost,
+        formItemStyle: getInputStyle());
+
+    FormDatetimeItem startTime = FormDatetimeItem(
+        label: "Start Time",
+        onlyTime: true,
+        value: employee?.startTime,
+        formItemStyle: getInputStyle());
+
+    FormIntItem sinceYear = FormIntItem(
+        label: "Since Year",
+        value: employee?.employeeSinceYear,
+        validators: [
+          FormIntRangeValidator(min: 1990, max: DateTime.now().year)
+        ],
         formItemStyle: getInputStyle());
 
     FormSelectItem country = FormSelectItem(
@@ -84,8 +117,13 @@ class FormEmployee extends FionaDynamicForm {
 
     addField("name", name);
     addField("password", password);
+    addField("email", email);
+    addField("sinceYear", sinceYear);
+    addField("salary", salary);
+    addField("number", number);
     addField("birthday", birthday);
     addField("lastPost", lastPost);
+    addField("startTime", startTime);
     addField("country", country);
     addField("province", state);
     addField("city", city);
@@ -99,6 +137,11 @@ class FormEmployee extends FionaDynamicForm {
         name: empMap["name"] ?? "", password: empMap["password"] ?? "");
     employee.birthday = empMap["birthday"];
     employee.lastPost = empMap["lastPost"];
+    employee.email = empMap["email"];
+    employee.salary = empMap["salary"];
+    employee.number = empMap["number"];
+    employee.employeeSinceYear = empMap["sinceYear"];
+    employee.startTime = empMap["startTime"];
     employee.rememberMe = empMap["rememberMe"];
     employee.city = empMap["city"];
     employee.province = empMap["province"];
@@ -109,8 +152,13 @@ class FormEmployee extends FionaDynamicForm {
   void setEmployee(Employee employee) {
     setItemValue("name", employee.name);
     setItemValue("password", employee.password);
+    setItemValue("email", employee.email);
+    setItemValue("salary", employee.salary);
+    setItemValue("number", employee.number);
     setItemValue("birthday", employee.birthday);
+    setItemValue("sinceYear", employee.employeeSinceYear);
     setItemValue("lastPost", employee.lastPost);
+    setItemValue("startTime", employee.startTime);
     setItemValue("country", employee.country);
     setItemValue("province", employee.province);
     setItemValue("city", employee.city);

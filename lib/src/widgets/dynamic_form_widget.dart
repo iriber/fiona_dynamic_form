@@ -30,8 +30,7 @@ class DynamicFormWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(flex: okFlex, child: btnSubmit ?? const SizedBox.shrink()),
-            Expanded(
-                flex: cancelFlex, child: btnCancel ?? const SizedBox.shrink()),
+            if (btnCancel != null) Expanded(flex: cancelFlex, child: btnCancel),
           ],
         ),
       ));

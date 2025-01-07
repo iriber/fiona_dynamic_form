@@ -7,11 +7,13 @@ class FormDatetimeItem extends FormItem {
   final String dateFormat;
   final String timeFormat;
   final bool withTime;
+  final bool onlyTime;
 
   FormDatetimeItem(
       {super.formItemStyle,
       required super.label,
       this.withTime = false,
+      this.onlyTime = false,
       this.dateFormat = "MM/dd/yyyy",
       this.timeFormat = "HH:mm",
       super.validators,
@@ -41,13 +43,15 @@ class FormDatetimeItem extends FormItem {
     if (value == null) {
       return "";
     }
-
-    if (withTime) {
+    if (onlyTime) {
+      return formatDateTime(value, timeFormat);
+    } else if (withTime) {
       return formatDateTime(value, "$dateFormat $timeFormat");
     } else {
       return formatDateTime(value, dateFormat);
     }
   }
+
   String formatDateTime(DateTime dateTime, String format) {
     return format
         .replaceAll('yyyy', dateTime.year.toString())
