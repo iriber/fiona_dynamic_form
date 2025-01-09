@@ -28,18 +28,33 @@ class _FormTextFieldState extends State<FormTextItemWidget> {
     widget.controller.text = formItem.initialValue ?? formItem.value ?? "";
 
     widget.controller.addListener(() {
-      formItem.value = (widget.controller.text);
-      setState(() {
-        error = "";
-      });
+      if(widget.controller.text!=formItem.value){
+        formItem.setValue  (widget.controller.text);
+        setState(() {
+          error = "";
+        });
+      }
+
+
     });
 
     formItem.addOnChangeListener((value) {
-      widget.controller.text = value ?? "";
-      setState(() {
-        error = "";
-      });
+      String originalStr =  widget.controller.text;
+      double original=0;
+      try{
+        original = double.parse(originalStr);
+      }catch(e){}
+
+      if(original!=value){
+        widget.controller.text = value?.toString() ?? "";
+        setState(() {
+          error = "";
+        });
+      }
+
     });
+
+
   }
 
   @override

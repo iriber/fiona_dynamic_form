@@ -63,7 +63,7 @@ abstract class FormItem {
     this.value = value;
     // alerts listeners
     for (var onChange in onChangeListeners) {
-      onChange(value);
+      onChange(getValue());
     }
   }
 

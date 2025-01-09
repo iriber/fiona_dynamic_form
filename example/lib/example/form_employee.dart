@@ -55,7 +55,10 @@ class FormEmployee extends FionaDynamicForm {
         formItemStyle: getInputStyle());
 
     number.addOnChangeListener((newNumber) {
-      percentage.setValue( newNumber * salary.value  );
+      percentage.setValue( (newNumber??0 )* (salary.getValue()??0)  );
+    });
+    salary.addOnChangeListener((newSalary) {
+      percentage.setValue( (number.getValue()??0 )* (newSalary??0)  );
     });
 
     FormDatetimeItem lastPost = FormDatetimeItem(

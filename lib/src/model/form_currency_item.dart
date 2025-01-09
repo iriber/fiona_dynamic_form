@@ -37,6 +37,9 @@ class FormCurrencyItem extends FormTextItem {
   /// Parses the current value to a double
   @override
   dynamic getValue() {
+    if( value is double ){
+      return value;
+    }
     try {
       return double.parse(value);
     } catch (error) {
