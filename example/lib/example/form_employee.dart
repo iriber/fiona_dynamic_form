@@ -2,7 +2,6 @@ import 'package:fiona_dynamic_form/fiona_dynamic_form.dart';
 import 'package:example/example/controllers/city_controller.dart';
 import 'package:example/example/controllers/country_controller.dart';
 import 'package:example/example/controllers/province_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'model/employee.dart';
@@ -38,7 +37,7 @@ class FormEmployee extends FionaDynamicForm {
 
     FormCurrencyItem salary = FormCurrencyItem(
         label: "Salary",
-        moneySymbol: "USD",
+        symbol: "USD",
         isPrefix: true,
         value: employee?.salary,
         formItemStyle: getInputStyle());
@@ -48,6 +47,16 @@ class FormEmployee extends FionaDynamicForm {
         digits: 3,
         value: employee?.number,
         formItemStyle: getInputStyle());
+
+
+    FormPercentageItem percentage = FormPercentageItem(
+        label: "Percentage",
+        value: employee?.percentage,
+        formItemStyle: getInputStyle());
+
+    number.addOnChangeListener((newNumber) {
+      percentage.setValue( newNumber * salary.value  );
+    });
 
     FormDatetimeItem lastPost = FormDatetimeItem(
         label: "Last Post",
@@ -64,8 +73,9 @@ class FormEmployee extends FionaDynamicForm {
     FormIntItem sinceYear = FormIntItem(
         label: "Since Year",
         value: employee?.employeeSinceYear,
+
         validators: [
-          FormIntRangeValidator(min: 1990, max: DateTime.now().year)
+          FormNumberRangeValidator(min: 1990, max: DateTime.now().year.toDouble(), defaultErrorMessage: "Invalid range number [1990,${DateTime.now().year}]")
         ],
         formItemStyle: getInputStyle());
 
@@ -121,6 +131,7 @@ class FormEmployee extends FionaDynamicForm {
     addField("sinceYear", sinceYear);
     addField("salary", salary);
     addField("number", number);
+    addField("percentage", percentage);
     addField("birthday", birthday);
     addField("lastPost", lastPost);
     addField("startTime", startTime);
@@ -140,6 +151,7 @@ class FormEmployee extends FionaDynamicForm {
     employee.email = empMap["email"];
     employee.salary = empMap["salary"];
     employee.number = empMap["number"];
+    employee.percentage = empMap["percentage"];
     employee.employeeSinceYear = empMap["sinceYear"];
     employee.startTime = empMap["startTime"];
     employee.rememberMe = empMap["rememberMe"];
@@ -155,6 +167,7 @@ class FormEmployee extends FionaDynamicForm {
     setItemValue("email", employee.email);
     setItemValue("salary", employee.salary);
     setItemValue("number", employee.number);
+    setItemValue("percentage", employee.percentage);
     setItemValue("birthday", employee.birthday);
     setItemValue("sinceYear", employee.employeeSinceYear);
     setItemValue("lastPost", employee.lastPost);

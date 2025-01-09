@@ -1,10 +1,9 @@
 import 'package:fiona_dynamic_form/fiona_dynamic_form.dart';
-import 'package:fiona_dynamic_form/src/model/form_text_item.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
-/// This class represents an Integer form item.
+/// This class represents a Decimal form item.
 class FormDecimalItem extends FormTextItem {
+  ///determines the digits of fraction part
   final int digits;
 
   FormDecimalItem(
@@ -20,7 +19,6 @@ class FormDecimalItem extends FormTextItem {
     }
     super.formItemStyle?.inputTextAlign = TextAlign.right;
 
-    //String strRegex = '^\d*\.?\d{0,$digits}';
     super.inputFormatters = [
       FilteringTextInputFormatter.allow(
           RegExp(r'^\d*\.?\d{0,' + digits.toString() + '}'))

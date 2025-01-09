@@ -11,6 +11,7 @@ export 'src/model/form_text_item.dart';
 export 'src/model/form_datetime_item.dart';
 export 'src/model/form_decimal_item.dart';
 export 'src/model/form_currency_item.dart';
+export 'src/model/form_percentage_item.dart';
 
 export 'src/model/form_button.dart';
 export 'src/model/form_button_style.dart';

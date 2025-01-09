@@ -1,26 +1,31 @@
 import 'package:fiona_dynamic_form/fiona_dynamic_form.dart';
 import 'package:flutter/services.dart';
 
-/// This class represents a Currency form item.
-class FormCurrencyItem extends FormTextItem {
-  ///currency symbol
-  final String symbol;
+/// This class represents a Percentage form item.
+class FormPercentageItem extends FormTextItem {
+  ///determines the digits of fraction part
+  final int digits;
 
   ///determines if the symbol is a prefix or suffix
   final bool isPrefix;
 
-  FormCurrencyItem(
-      {required this.symbol,
-      this.isPrefix = true,
+  FormPercentageItem(
+      {this.digits = 2,
+      this.isPrefix = false,
       super.formItemStyle,
       required super.label,
       super.validators,
       super.value}) {
     inputType = const TextInputType.numberWithOptions(decimal: true);
 
-    super.inputFormatters = [
-      FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}'))
-    ];
+    if (digits > 0) {
+      super.inputFormatters = [
+        FilteringTextInputFormatter.allow(
+            RegExp(r'^\d*\.?\d{0,' + digits.toString() + '}'))
+      ];
+    } else {
+      super.inputFormatters = [FilteringTextInputFormatter.digitsOnly];
+    }
 
     if (super.formItemStyle == null) {
       super.formItemStyle = FormItemStyle();
@@ -28,9 +33,9 @@ class FormCurrencyItem extends FormTextItem {
     super.formItemStyle?.inputTextAlign = TextAlign.right;
 
     if (isPrefix) {
-      super.formItemStyle?.prefixText = symbol;
+      super.formItemStyle?.prefixText = "%";
     } else {
-      super.formItemStyle?.suffixText = symbol;
+      super.formItemStyle?.suffixText = "%";
     }
   }
 

@@ -53,3 +53,15 @@
 ## 1.6.5
 
 - Field items for Decimal & Currency. Validators for email & number range.
+
+## 1.6.6
+
+- Fix unnecessary imports
+
+## 1.6.7
+
+- Field item for percentage
+
+## 1.6.8
+
+- Fix unnecessary imports

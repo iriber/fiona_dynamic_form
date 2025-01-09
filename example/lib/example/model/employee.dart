@@ -18,6 +18,7 @@ class Employee {
   DateTime? startTime;
   double? salary;
   double? number;
+  double? percentage;
 
   Employee(
       {required this.name,
@@ -32,7 +33,8 @@ class Employee {
       this.lastPost,
       this.startTime,
       this.salary,
-      this.number}) {
+      this.number,
+      this.percentage}) {
     id = const Uuid().v4();
   }
 }

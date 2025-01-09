@@ -1,5 +1,4 @@
-import 'package:fiona_dynamic_form/src/model/form_text_item.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:fiona_dynamic_form/fiona_dynamic_form.dart';
 import 'package:flutter/services.dart';
 
 /// This class represents an Integer form item.
@@ -10,6 +9,11 @@ class FormIntItem extends FormTextItem {
       super.validators,
       super.value,
       super.inputType = TextInputType.number}) {
+    if (super.formItemStyle == null) {
+      super.formItemStyle = FormItemStyle();
+    }
+    super.formItemStyle?.inputTextAlign = TextAlign.right;
+
     super.inputFormatters = [
       FilteringTextInputFormatter.digitsOnly,
     ];

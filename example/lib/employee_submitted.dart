@@ -36,6 +36,7 @@ class EmployeeSubmitted extends StatelessWidget {
                 Text("Since year: ${employee.employeeSinceYear} "),
                 Text("Salary: ${employee.salary} "),
                 Text("Number: ${employee.number} "),
+                Text("Percentage: ${employee.percentage} "),
                 Text("Birthday: ${employee.birthday} "),
                 Text("Last Post: ${employee.lastPost} "),
                 Text("Start Time: ${employee.startTime} "),
