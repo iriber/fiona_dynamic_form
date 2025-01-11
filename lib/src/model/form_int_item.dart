@@ -22,7 +22,7 @@ class FormIntItem extends FormTextItem {
   /// Parses the current value to an integer
   @override
   dynamic getValue() {
-    if( value is int ){
+    if (value is int) {
       return value;
     }
     try {

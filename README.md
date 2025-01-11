@@ -7,14 +7,14 @@ Use DynamicForm to define your forms. A dynamicForm is able to validate itself a
 
 ## Getting started
 
-It packages implements different types of input fields. For each kind of input you will find a FormItem and also each FormItem is tied to a FormItemWidget.
+This packages implements different types of input fields. For each kind of input you will find a FormItem and also each FormItem is tied to a FormItemWidget.
 To know about the idea and the structure you can read this article:
 https://medium.com/@ber.iribarne/forms-in-flutter-how-to-deal-with-forms-in-flutter-2686c03ad9b3
 
 
 ## Usage
 
-You can find a complete example the the example directory.
+You can find a complete example the example directory.
 
 ```dart
 import 'package:fiona_dynamic_form/fiona_dynamic_form.dart';

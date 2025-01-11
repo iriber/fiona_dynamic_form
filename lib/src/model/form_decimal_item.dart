@@ -28,7 +28,7 @@ class FormDecimalItem extends FormTextItem {
   /// Parses the current value to an integer
   @override
   dynamic getValue() {
-    if( value is double ){
+    if (value is double) {
       return value;
     }
     try {

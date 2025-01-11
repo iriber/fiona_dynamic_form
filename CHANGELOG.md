@@ -65,3 +65,11 @@
 ## 1.6.8
 
 - Fix unnecessary imports
+
+## 1.6.9
+
+- Fix listeners
+
+## 1.6.10
+
+- Fix empty catch block

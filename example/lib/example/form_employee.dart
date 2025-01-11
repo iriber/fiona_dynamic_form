@@ -48,17 +48,16 @@ class FormEmployee extends FionaDynamicForm {
         value: employee?.number,
         formItemStyle: getInputStyle());
 
-
     FormPercentageItem percentage = FormPercentageItem(
         label: "Percentage",
         value: employee?.percentage,
         formItemStyle: getInputStyle());
 
     number.addOnChangeListener((newNumber) {
-      percentage.setValue( (newNumber??0 )* (salary.getValue()??0)  );
+      percentage.setValue((newNumber ?? 0) * (salary.getValue() ?? 0));
     });
     salary.addOnChangeListener((newSalary) {
-      percentage.setValue( (number.getValue()??0 )* (newSalary??0)  );
+      percentage.setValue((number.getValue() ?? 0) * (newSalary ?? 0));
     });
 
     FormDatetimeItem lastPost = FormDatetimeItem(
@@ -76,9 +75,12 @@ class FormEmployee extends FionaDynamicForm {
     FormIntItem sinceYear = FormIntItem(
         label: "Since Year",
         value: employee?.employeeSinceYear,
-
         validators: [
-          FormNumberRangeValidator(min: 1990, max: DateTime.now().year.toDouble(), defaultErrorMessage: "Invalid range number [1990,${DateTime.now().year}]")
+          FormNumberRangeValidator(
+              min: 1990,
+              max: DateTime.now().year.toDouble(),
+              defaultErrorMessage:
+                  "Invalid range number [1990,${DateTime.now().year}]")
         ],
         formItemStyle: getInputStyle());
 
