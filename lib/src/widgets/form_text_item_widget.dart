@@ -1,3 +1,4 @@
+import 'package:fiona_dynamic_form/fiona_dynamic_form.dart';
 import 'package:fiona_dynamic_form/src/model/form_text_item.dart';
 import 'package:fiona_dynamic_form/src/widgets/form_item_widget.dart';
 import 'package:flutter/material.dart';
@@ -38,19 +39,31 @@ class _FormTextFieldState extends State<FormTextItemWidget> {
 
     formItem.addOnChangeListener((value) {
       String originalStr = widget.controller.text;
-      double original;
-      try {
-        original = double.parse(originalStr);
-      } catch (e) {
-        original = 0;
+
+      if( formItem is FormDecimalItem){
+        double original;
+        try {
+          original = double.parse(originalStr);
+          if (original != value) {
+            widget.controller.text = value?.toString() ?? "";
+            setState(() {
+              error = "";
+            });
+          }
+        } catch (e) {
+          original = 0;
+        }
+      }else{
+        if (originalStr != value) {
+          widget.controller.text = value?.toString() ?? "";
+          setState(() {
+            error = "";
+          });
+        }
       }
 
-      if (original != value) {
-        widget.controller.text = value?.toString() ?? "";
-        setState(() {
-          error = "";
-        });
-      }
+
+
     });
   }
 
