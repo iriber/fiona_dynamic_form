@@ -1,6 +1,4 @@
 import 'package:fiona_dynamic_form/fiona_dynamic_form.dart';
-import 'package:fiona_dynamic_form/src/model/form_text_item.dart';
-import 'package:fiona_dynamic_form/src/widgets/form_item_widget.dart';
 import 'package:flutter/material.dart';
 
 /// This class represents a text form item widget.
@@ -26,7 +24,8 @@ class _FormTextFieldState extends State<FormTextItemWidget> {
   void initState() {
     super.initState();
     formItem = widget.formTextItem;
-    widget.controller.text = formItem.initialValue?.toString() ?? formItem.value?.toString() ?? "";
+    widget.controller.text =
+        formItem.initialValue?.toString() ?? formItem.value?.toString() ?? "";
 
     widget.controller.addListener(() {
       if (!formItem.isEqual(widget.controller.text)) {
@@ -45,19 +44,11 @@ class _FormTextFieldState extends State<FormTextItemWidget> {
           error = "";
         });
       }
-
-
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    /*
-    widget.controller.addListener(() {
-      formItem.setValue(widget.controller.text);
-    });*/
-
     formItem.onError = ((messages) {
       setState(() {
         String msg = "";

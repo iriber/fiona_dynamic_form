@@ -7,7 +7,6 @@ class CityController extends FormSelectFieldController {
 
   CityController() {
     cities = List<City>.empty(growable: true);
-    cities.add(City(0, "- Select a city -", 0));
     cities.add(City(1, "Azul", 1));
     cities.add(City(2, "Buenos Aires", 1));
     cities.add(City(3, "Olavarría", 1));
@@ -41,5 +40,10 @@ class CityController extends FormSelectFieldController {
   @override
   int getItemId(item) {
     return (item as City).id;
+  }
+
+  @override
+  buildItem(int id, String label) {
+    return City(id, label, 0);
   }
 }

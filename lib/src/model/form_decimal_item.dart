@@ -37,6 +37,4 @@ class FormDecimalItem extends FormTextItem {
       return null;
     }
   }
-
-
 }

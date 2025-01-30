@@ -7,7 +7,6 @@ class ProvinceController extends FormSelectFieldController {
 
   ProvinceController() {
     states = List<Province>.empty(growable: true);
-    states.add(Province(0, "- Select an state -", 0));
     states.add(Province(1, "Buenos", 1));
     states.add(Province(2, "Córdoba", 1));
     states.add(Province(3, "Santa Fé", 1));
@@ -36,5 +35,9 @@ class ProvinceController extends FormSelectFieldController {
   @override
   int getItemId(item) {
     return (item as Province).id;
+  }
+  @override
+  buildItem(int id, String label) {
+    return Province(id, label, 0);
   }
 }

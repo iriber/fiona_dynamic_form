@@ -31,6 +31,4 @@ class FormIntItem extends FormTextItem {
       return null;
     }
   }
-
-
 }

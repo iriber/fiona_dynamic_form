@@ -25,12 +25,27 @@ class _FormSelectItemWidgetState extends State<FormSelectItemWidget> {
     super.initState();
 
     formItem = widget.formItem;
-    selectedValue = formItem.value;
-    formItem.selectFieldController.selected = selectedValue;
+    if (!formItem.isEmpty()) {
+      selectedValue = formItem.value;
+      formItem.selectFieldController.selected = selectedValue;
+    } else {
+      if (formItem.addEmptyValue) {
+        selectedValue = formItem.getDefaultValue();
+        formItem.selectFieldController.selected = selectedValue;
+      }
+    }
+
     if (formItem.fillAllItems && items.isEmpty) {
       formItem.selectFieldController.findAll().then((results) {
-        setState(() {
+        List items = List.empty(growable: true);
+        if (formItem.addEmptyValue) {
+          items.add(formItem.getDefaultValue());
+          items.addAll(results);
+        } else {
           items = results;
+        }
+        setState(() {
+          this.items = items;
         });
       });
     }
@@ -45,9 +60,20 @@ class _FormSelectItemWidgetState extends State<FormSelectItemWidget> {
 
     formItem.onFilterChange = ((value) {
       formItem.selectFieldController.findAll().then((results) {
+        List items = List.empty(growable: true);
+        if (formItem.addEmptyValue) {
+          items.add(formItem.getDefaultValue());
+          items.addAll(results);
+        } else {
+          items = results;
+        }
+        if (formItem.isEmpty() && formItem.addEmptyValue) {
+          selectedValue = formItem.getDefaultValue();
+          formItem.selectFieldController.selected = selectedValue;
+        }
         setState(() {
           error = "";
-          items = results;
+          this.items = items;
         });
       });
     });

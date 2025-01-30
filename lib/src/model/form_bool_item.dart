@@ -19,7 +19,8 @@ class FormBoolItem extends FormItem {
 
   @override
   Widget draw(BuildContext context) {
-    return FormBoolItemWidget(key:ValueKey(Random().nextInt(10000)), formItem: this);
+    return FormBoolItemWidget(
+        key: ValueKey(Random().nextInt(10000)), formItem: this);
   }
 
   @override

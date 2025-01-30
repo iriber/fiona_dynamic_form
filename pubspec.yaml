@@ -1,7 +1,7 @@
 name: fiona_dynamic_form
 description: Dynamic Form package project. To create forms dynamically. 
   You will find some input implementation but then you will be able to create any input you need.
-version: 1.6.10
+version: 1.6.12
 repository: https://github.com/iriber/fiona_dynamic_form
 
 environment:

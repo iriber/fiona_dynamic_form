@@ -73,3 +73,11 @@
 ## 1.6.10
 
 - Fix empty catch block
+
+## 1.6.11
+
+- Fix item values parse
+
+## 1.6.12
+
+- Default empty values for select items (dropdown)

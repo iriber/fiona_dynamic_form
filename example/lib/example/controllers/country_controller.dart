@@ -6,7 +6,6 @@ class CountryController extends FormSelectFieldController {
 
   CountryController() {
     countries = List<Country>.empty(growable: true);
-    countries.add(Country(0, "- Select a Country -"));
     countries.add(Country(1, "Argentina"));
     countries.add(Country(2, "Brasil"));
   }
@@ -26,5 +25,9 @@ class CountryController extends FormSelectFieldController {
   @override
   int getItemId(item) {
     return (item as Country).id;
+  }
+  @override
+  buildItem(int id, String label) {
+    return Country(id, label);
   }
 }

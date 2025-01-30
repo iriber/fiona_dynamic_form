@@ -28,7 +28,8 @@ class FormDatetimeItem extends FormItem {
 
   @override
   Widget draw(BuildContext context) {
-    return FormDatetimeItemWidget(key:ValueKey(Random().nextInt(10000)), formItem: this);
+    return FormDatetimeItemWidget(
+        key: ValueKey(Random().nextInt(10000)), formItem: this);
   }
 
   @override
@@ -40,7 +41,6 @@ class FormDatetimeItem extends FormItem {
       return date;
     }
   }
-
 
   String formatValue() {
     if (value == null) {

@@ -15,6 +15,12 @@ class FormSelectItem extends FormItem {
   /// To fill all items at the begins
   final bool fillAllItems;
 
+  /// To add the empty value.
+  final bool addEmptyValue;
+
+  /// default value.
+  final dynamic emptyTextValue;
+
   /// A callback function to alert a filter change.
   Function(dynamic)? onFilterChange;
 
@@ -22,6 +28,8 @@ class FormSelectItem extends FormItem {
       {required this.selectFieldController,
       this.enableSearch = false,
       this.fillAllItems = true,
+      this.addEmptyValue = true,
+      this.emptyTextValue,
       super.value,
       super.formItemStyle,
       required super.label,
@@ -43,12 +51,22 @@ class FormSelectItem extends FormItem {
 
   @override
   bool isEmpty() {
-    return selectFieldController.isEmpty(value);
+    bool empty = selectFieldController.isEmpty(value);
+    if (!empty) {
+      String label = selectFieldController.getItemLabel(value);
+      empty = (label == emptyTextValue);
+    }
+    return empty;
+  }
+
+  dynamic getDefaultValue() {
+    return selectFieldController.buildItem(-1, emptyTextValue ?? "");
   }
 
   @override
   Widget draw(BuildContext context) {
-    return FormSelectItemWidget(key:ValueKey(Random().nextInt(10000)), formItem: this);
+    return FormSelectItemWidget(
+        key: ValueKey(Random().nextInt(10000)), formItem: this);
   }
 }
 
@@ -66,6 +84,8 @@ abstract class FormSelectFieldController {
 
   String getItemLabel(item);
   int getItemId(item);
+
+  dynamic buildItem(int id, String label);
 
   bool isEmpty(item) {
     return (item == null) || getItemId(item) <= 0;

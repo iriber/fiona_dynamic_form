@@ -25,9 +25,9 @@ class FormTextItem extends FormItem {
     return value == null || (value?.isEmpty ?? true);
   }
 
-
   @override
   Widget draw(BuildContext context) {
-    return FormTextItemWidget(key:ValueKey(Random().nextInt(10000)), formTextItem: this);
+    return FormTextItemWidget(
+        key: ValueKey(Random().nextInt(10000)), formTextItem: this);
   }
 }

@@ -86,18 +86,24 @@ class FormEmployee extends FionaDynamicForm {
 
     FormSelectItem country = FormSelectItem(
         label: "Country",
+        emptyTextValue: "- Select a Country -",
+        addEmptyValue: true,
         value: employee?.country,
         validators: [FormRequiredValidator()],
         selectFieldController: CountryController());
 
     FormSelectItem state = FormSelectItem(
         label: "State",
+        emptyTextValue: "- Select a State -",
+        addEmptyValue: true,
         value: employee?.province,
         validators: [FormRequiredValidator()],
         selectFieldController: ProvinceController());
 
     FormSelectItem city = FormSelectItem(
         label: "City",
+        emptyTextValue: "- Select a City -",
+        addEmptyValue: true,
         value: employee?.city,
         validators: [FormRequiredValidator()],
         selectFieldController: CityController());
