@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fiona_dynamic_form/src/model/form_item.dart';
 import 'package:fiona_dynamic_form/src/widgets/form_text_item_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,6 +27,6 @@ class FormTextItem extends FormItem {
 
   @override
   Widget draw(BuildContext context) {
-    return FormTextItemWidget(formTextItem: this);
+    return FormTextItemWidget(key:ValueKey(Random().nextInt(10000)), formTextItem: this);
   }
 }
