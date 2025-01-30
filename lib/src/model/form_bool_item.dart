@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fiona_dynamic_form/src/model/form_item.dart';
 import 'package:fiona_dynamic_form/src/widgets/form_bool_item_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,7 +19,7 @@ class FormBoolItem extends FormItem {
 
   @override
   Widget draw(BuildContext context) {
-    return FormBoolItemWidget(formItem: this);
+    return FormBoolItemWidget(key:ValueKey(Random().nextInt(10000)), formItem: this);
   }
 
   @override

@@ -41,7 +41,7 @@ class FormPercentageItem extends FormTextItem {
 
   /// Parses the current value to a double
   @override
-  dynamic getValue() {
+  dynamic parseValue(value) {
     if (value is double) {
       return value;
     }

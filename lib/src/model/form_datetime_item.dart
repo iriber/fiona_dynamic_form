@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fiona_dynamic_form/src/model/form_item.dart';
 import 'package:fiona_dynamic_form/src/widgets/form_datetime_item_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +28,7 @@ class FormDatetimeItem extends FormItem {
 
   @override
   Widget draw(BuildContext context) {
-    return FormDatetimeItemWidget(formItem: this);
+    return FormDatetimeItemWidget(key:ValueKey(Random().nextInt(10000)), formItem: this);
   }
 
   @override
@@ -38,6 +40,7 @@ class FormDatetimeItem extends FormItem {
       return date;
     }
   }
+
 
   String formatValue() {
     if (value == null) {

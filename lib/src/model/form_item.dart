@@ -43,20 +43,9 @@ abstract class FormItem {
 
   /// Gets current value
   dynamic getValue() {
-    return value;
+    return parseValue(value);
   }
 
-/*
-  /// Sets current value
-  initializeValue(dynamic value) {
-    // sets the value
-    this.value = value;
-    // alerts listeners
-    if( onInitializeValue!=null) {
-      onInitializeValue!(value);
-    }
-  }
-*/
   /// Sets current value
   setValue(dynamic value) {
     // sets the value
@@ -69,6 +58,21 @@ abstract class FormItem {
 
   /// Returns if the current value is empty or not.
   bool isEmpty();
+
+  ///Compares with other value
+  bool isEqual(dynamic value) {
+    return parseValue(this.value) == parseValue(value);
+  }
+
+  ///Compares 2 values
+  bool areEquals(dynamic value, dynamic anotherValue) {
+    return parseValue(value) == parseValue(anotherValue);
+  }
+
+  ///Parses the value
+  dynamic parseValue(dynamic value) {
+    return value;
+  }
 
   /// Validates the current value
   bool validate({String msg = "Required"}) {

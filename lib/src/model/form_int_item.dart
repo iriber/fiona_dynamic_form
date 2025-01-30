@@ -21,7 +21,7 @@ class FormIntItem extends FormTextItem {
 
   /// Parses the current value to an integer
   @override
-  dynamic getValue() {
+  dynamic parseValue(value) {
     if (value is int) {
       return value;
     }
@@ -31,4 +31,6 @@ class FormIntItem extends FormTextItem {
       return null;
     }
   }
+
+
 }

@@ -26,10 +26,10 @@ class _FormTextFieldState extends State<FormTextItemWidget> {
   void initState() {
     super.initState();
     formItem = widget.formTextItem;
-    widget.controller.text = formItem.initialValue ?? formItem.value ?? "";
+    widget.controller.text = formItem.initialValue?.toString() ?? formItem.value?.toString() ?? "";
 
     widget.controller.addListener(() {
-      if (widget.controller.text != formItem.value) {
+      if (!formItem.isEqual(widget.controller.text)) {
         formItem.setValue(widget.controller.text);
         setState(() {
           error = "";
@@ -39,27 +39,11 @@ class _FormTextFieldState extends State<FormTextItemWidget> {
 
     formItem.addOnChangeListener((value) {
       String originalStr = widget.controller.text;
-
-      if( formItem is FormDecimalItem){
-        double original;
-        try {
-          original = double.parse(originalStr);
-          if (original != value) {
-            widget.controller.text = value?.toString() ?? "";
-            setState(() {
-              error = "";
-            });
-          }
-        } catch (e) {
-          original = 0;
-        }
-      }else{
-        if (originalStr != value) {
-          widget.controller.text = value?.toString() ?? "";
-          setState(() {
-            error = "";
-          });
-        }
+      if (!formItem.areEquals(originalStr, value)) {
+        widget.controller.text = value?.toString() ?? "";
+        setState(() {
+          error = "";
+        });
       }
 
 
