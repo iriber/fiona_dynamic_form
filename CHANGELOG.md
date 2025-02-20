@@ -81,3 +81,15 @@
 ## 1.6.12
 
 - Default empty values for select items (dropdown)
+
+## 1.6.13
+
+- TextDirections to fix form rendering
+
+## 1.6.14
+
+- Fill form from an object
+
+## 1.6.15
+
+- States fixes

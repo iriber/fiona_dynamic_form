@@ -28,9 +28,12 @@ class _FormDatetimeItemWidgetState extends State<FormDatetimeItemWidget> {
       lastDate: DateTime(2100),
     );
     if (picked != null && picked != formItem.value) {
-      setState(() {
-        formItem.value = picked;
-      });
+      if (mounted) {
+        setState(() {
+          formItem.value = picked;
+        });
+      };
+
     }
   }
 
@@ -51,15 +54,17 @@ class _FormDatetimeItemWidgetState extends State<FormDatetimeItemWidget> {
       );
 
       if (pickedTime != null) {
-        setState(() {
-          formItem.value = DateTime(
-            pickedDate.year,
-            pickedDate.month,
-            pickedDate.day,
-            pickedTime.hour,
-            pickedTime.minute,
-          );
-        });
+        if (mounted) {
+          setState(() {
+            formItem.value = DateTime(
+              pickedDate.year,
+              pickedDate.month,
+              pickedDate.day,
+              pickedTime.hour,
+              pickedTime.minute,
+            );
+          });
+        };
       }
     }
   }
@@ -72,15 +77,17 @@ class _FormDatetimeItemWidgetState extends State<FormDatetimeItemWidget> {
           : TimeOfDay.now(),
     );
     if (pickedTime != null) {
-      setState(() {
-        formItem.value = DateTime(
-          1900,
-          1,
-          1,
-          pickedTime.hour,
-          pickedTime.minute,
-        );
-      });
+      if (mounted) {
+        setState(() {
+          formItem.value = DateTime(
+            1900,
+            1,
+            1,
+            pickedTime.hour,
+            pickedTime.minute,
+          );
+        });
+      }
     }
   }
 
@@ -92,30 +99,36 @@ class _FormDatetimeItemWidgetState extends State<FormDatetimeItemWidget> {
 
     widget.controller.addListener(() {
       formItem.value = (widget.controller.text);
-      setState(() {
-        error = "";
-      });
+      if (mounted) {
+          setState(() {
+            error = "";
+          });
+      }
     });
 
     formItem.addOnChangeListener((value) {
       widget.controller.text = value ?? "";
-      setState(() {
-        error = "";
-      });
+      if (mounted) {
+          setState(() {
+            error = "";
+          });
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     formItem.onError = ((messages) {
-      setState(() {
-        String msg = "";
-        for (var element in messages) {
-          msg += " $element";
-        }
+      if (mounted) {
+        setState(() {
+          String msg = "";
+          for (var element in messages) {
+            msg += " $element";
+          }
 
-        error = msg;
-      });
+          error = msg;
+        });
+      }
     });
     Widget body;
     switch (formItem.formItemStyle?.labelPosition) {
@@ -201,6 +214,7 @@ class _FormDatetimeItemWidgetState extends State<FormDatetimeItemWidget> {
       },
       child: AbsorbPointer(
         child: TextFormField(
+          textDirection: TextDirection.rtl,
           readOnly: true,
           decoration: InputDecoration(
               prefixIcon: formItem.formItemStyle?.prefixIcon,

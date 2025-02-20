@@ -141,11 +141,16 @@ class _FormSelectItemWidgetState extends State<FormSelectItemWidget> {
 
           //icon: widget.prefixIcon??widget.prefixIcon,
           value: formItem.selectFieldController.selected,
-          hint: Text("  ${formItem.label}"),
+          hint: Text(
+            "  ${formItem.label}",
+          ),
           items: items.map((dynamic option) {
             return DropdownMenuItem<dynamic>(
               value: option,
-              child: Text(formItem.selectFieldController.getItemLabel(option)),
+              child: Text(
+                formItem.selectFieldController.getItemLabel(option),
+                textDirection: TextDirection.rtl,
+              ),
             );
           }).toList(),
           onChanged: (dynamic newValue) {

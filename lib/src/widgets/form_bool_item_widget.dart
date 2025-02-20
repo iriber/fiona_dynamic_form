@@ -28,19 +28,23 @@ class _FormBoolItemWidgetState extends State<FormBoolItemWidget> {
   @override
   Widget build(BuildContext context) {
     formItem.onError = ((messages) {
-      setState(() {
-        String msg = "";
-        for (var element in messages) {
-          msg += " $element";
-        }
+      if (mounted) {
+        setState(() {
+          String msg = "";
+          for (var element in messages) {
+            msg += " $element";
+          }
 
-        error = msg;
-      });
+          error = msg;
+        });
+      }
     });
     formItem.addOnChangeListener((value) {
-      setState(() {
-        error = "";
-      });
+      if (mounted) {
+        setState(() {
+          error = "";
+        });
+      }
     });
 
     return InkWell(

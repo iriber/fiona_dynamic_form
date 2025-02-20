@@ -83,6 +83,7 @@ abstract class FormSelectFieldController {
   Future<List> findItems(String text);
 
   String getItemLabel(item);
+
   int getItemId(item);
 
   dynamic buildItem(int id, String label);

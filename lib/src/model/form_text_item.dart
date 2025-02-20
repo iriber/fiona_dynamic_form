@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 class FormTextItem extends FormItem {
   /// Input type
   TextInputType? inputType;
+
   // Input type formatters
   List<TextInputFormatter>? inputFormatters;
 

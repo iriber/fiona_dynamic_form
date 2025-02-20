@@ -12,6 +12,7 @@ class DynamicFormWidget extends StatelessWidget {
     List<Widget> children = List.empty(growable: true);
 
     form.items?.forEach((key, item) {
+      //children.add(item.draw(context));
       children.add(Container(
         padding: const EdgeInsets.all(10),
         child: item.draw(context),
@@ -21,12 +22,16 @@ class DynamicFormWidget extends StatelessWidget {
     Widget? btnSubmit = form.btnSubmit?.draw(context);
     Widget? btnCancel = form.btnCancel?.draw(context);
 
+    //TODO check onsubmit
+
     int okFlex = 5 + (btnCancel == null ? 5 : 0);
     int cancelFlex = 5 + (btnSubmit == null ? 5 : 0);
+
     if (btnSubmit != null || btnCancel != null) {
       children.add(Container(
         padding: const EdgeInsets.all(10),
         child: Row(
+          //textDirection: TextDirection.rtl,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(flex: okFlex, child: btnSubmit ?? const SizedBox.shrink()),
@@ -36,15 +41,18 @@ class DynamicFormWidget extends StatelessWidget {
       ));
     }
 
-    return ListView(
+    return Expanded(
+        child: ListView(
+      shrinkWrap: true,
       children: [
         Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
+            //textDirection: TextDirection.rtl,
             children: children,
           ),
         )
       ],
-    );
+    ));
   }
 }

@@ -30,9 +30,12 @@ class _FormTextFieldState extends State<FormTextItemWidget> {
     widget.controller.addListener(() {
       if (!formItem.isEqual(widget.controller.text)) {
         formItem.setValue(widget.controller.text);
-        setState(() {
-          error = "";
-        });
+        if (mounted) {
+          setState(() {
+            error = "";
+          });
+        };
+
       }
     });
 
@@ -40,9 +43,11 @@ class _FormTextFieldState extends State<FormTextItemWidget> {
       String originalStr = widget.controller.text;
       if (!formItem.areEquals(originalStr, value)) {
         widget.controller.text = value?.toString() ?? "";
-        setState(() {
-          error = "";
-        });
+        if (mounted) {
+          setState(() {
+            error = "";
+          });
+        };
       }
     });
   }
@@ -141,6 +146,7 @@ class _FormTextFieldState extends State<FormTextItemWidget> {
     bool hasError = (error ?? "").isNotEmpty;
 
     return TextFormField(
+      textDirection: TextDirection.rtl,
       textAlign: formItem.formItemStyle?.inputTextAlign ?? TextAlign.start,
       style: formItem.formItemStyle?.inputStyle,
       obscureText: formItem.formItemStyle?.hideText ?? false,

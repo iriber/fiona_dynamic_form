@@ -42,6 +42,7 @@ class FionaDynamicForm {
     items?[key]?.initializeValue(value);
   }
 */
+
   /// Build an map with all the item values
   Map<String, dynamic> buildObject() {
     Map<String, dynamic> result = {};
@@ -51,6 +52,12 @@ class FionaDynamicForm {
     });
 
     return result;
+  }
+
+  void setObject(Map<String, dynamic>? values) {
+    values?.entries.forEach((element) {
+      getItem(element.key)?.setValue(element.value);
+    });
   }
 
   /// Validate the form
